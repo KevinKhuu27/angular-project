@@ -1,0 +1,65 @@
+
+/* Parent list */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each task row */
+.list > li {
+  display: flex;
+  align-items: center;     /* vertical centering */
+  gap: 12px;               /* space between groups */
+  padding: 8px 0;
+}
+
+/* Left block: checkbox + title */
+.list > li > label {
+  display: inline-flex;    /* normalize inline alignment */
+  align-items: center;     /* center checkbox and text */
+  gap: 8px;
+  flex: 1 1 auto;          /* take remaining space on the left */
+  min-width: 0;            /* allow title to truncate if needed */
+}
+
+/* Title text */
+.list .title {
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Date meta sits in the middle; push actions to the far right */
+.list .meta {
+  margin-left: 8px;
+  margin-right: 8px;
+  white-space: nowrap;
+  align-self: center;      /* ensure vertical centering in case of multi-line containers */
+}
+
+/* Right block: actions (Details + Delete) */
+.list .actions {
+  display: inline-flex;    /* make inline items align consistently */
+  align-items: center;     /* vertically center the link and button */
+  gap: 8px;
+}
+
+/* Normalize link/button alignment inside actions */
+.list .actions a,
+.list .actions button {
+  display: inline-flex;    /* avoids baseline misalignment */
+  align-items: center;
+  justify-content: center;
+  line-height: 1;          /* normalize line height */
+  height: 28px;            /* optional: consistent click target */
+  padding: 0 10px;         /* optional: visual consistency */
+}
+
+/* Optional: make the middle date not “push” actions if narrow */
+@media (max-width: 480px) {
+  .list .meta {
+    display: none;         /* hide date on small screens if desired */
+  }
+}

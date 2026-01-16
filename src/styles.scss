@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+
+:root {
+  --bg: #0f172a;
+  --panel: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #22d3ee;
+  --danger: #ef4444;
+  --done: #22c55e;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  background: linear-gradient(180deg, #0b1220, #0e1525);
+  color: var(--text);
+}
+.header {
+  display: flex; align-items: baseline; gap: 1rem;
+  padding: 1rem 1.25rem; border-bottom: 1px solid #1f2937;
+  position: sticky; top: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px);
+}
+.header a { color: var(--muted); text-decoration: none; }
+.header a.active { color: var(--accent); }
+.container { max-width: 880px; margin: 1rem auto; padding: 0 1rem; }
+.card {
+  background: var(--panel); border: 1px solid #1f2937; border-radius: 10px;
+  padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.add-row { display: flex; gap: .5rem; margin-bottom: .75rem; }
+.add-row.invalid input { outline: 2px solid #f59e0b; }
+input, button {
+  font: inherit; padding: .6rem .75rem; border-radius: 8px; border: 1px solid #374151; background: #0b1220; color: var(--text);
+}
+button { background: #10172a; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+button.danger { border-color: var(--danger); color: #fecaca; }
+.filters { display: flex; gap: .5rem; margin-bottom: .75rem; }
+.filters .active { border-color: var(--accent); color: var(--accent); }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.list li {
+  display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .75rem;
+  padding: .6rem .75rem; border: 1px solid #243044; border-radius: 10px; background: #0a1020;
+}
+.list li.done .title { text-decoration: line-through; color: #92a2b4; }
+.meta { color: var(--muted); font-size: .85rem; }
+.actions { display: flex; gap: .5rem; }
+.badge { padding: .2rem .5rem; border-radius: .4rem; font-size: .8rem; }
+.badge-open { background: #2a2437; color: #e9d5ff; border: 1px solid #7c3aed; }
+.badge-done { background: #112a1b; color: #bbf7d0; border: 1px solid var(--done); }
+.row { display: grid; grid-template-columns: 150px 1fr; gap: .75rem; align-items: center; margin: .5rem 0; }
+.empty { color: var(--muted); padding: .75rem; }

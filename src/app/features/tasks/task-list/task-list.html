@@ -1,0 +1,46 @@
+<section class="card">
+  <h2>Tasks</h2>
+
+  <form
+    (ngSubmit)="onSubmit($event)"
+    class="add-row"
+    [class.invalid]="addControl.invalid && addControl.touched"
+  >
+    <input
+      type="text"
+      [formControl]="addControl"
+      placeholder="Add a task (min 2 chars)"
+      aria-label="New task title"
+      (keyup.enter)="add()"
+    />
+    <button type="button" (click)="add()" [disabled]="addControl.invalid">
+      Add
+    </button>
+  </form>
+
+  <div class="filters">
+    <button (click)="filter.set('all')"       [class.active]="filter() === 'all'">All</button>
+    <button (click)="filter.set('active')"    [class.active]="filter() === 'active'">Active</button>
+    <button (click)="filter.set('completed')" [class.active]="filter() === 'completed'">Completed</button>
+  </div>
+
+  <ul class="list">
+    <li *ngFor="let t of filtered(); trackBy: trackById" [class.done]="t.completed">
+      <label>
+        <input type="checkbox" [checked]="t.completed" (change)="toggle(t.id)" />
+        <span class="title">{{ t.title }}</span>
+      </label>
+
+      <span class="meta">{{ t.createdAt | date:'short' }}</span>
+
+      <span class="actions">
+        <a [routerLink]="['/tasks', t.id]">Details</a>
+        <button class="danger" (click)="remove(t.id)">Delete</button>
+      </span>
+    </li>
+  </ul>
+
+  <p *ngIf="filtered().length === 0" class="empty">
+    No tasks for this filter.
+  </p>
+</section>

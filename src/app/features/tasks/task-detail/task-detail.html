@@ -1,0 +1,37 @@
+<ng-container *ngIf="task$ | async as task; else missing">
+  <section class="card">
+    <a routerLink="/tasks">← Back</a>
+    <h2>Task #{{ task.id }}</h2>
+
+    <div class="row">
+      <label>Created</label>
+      <div>{{ task.createdAt | date:'fullDate' }} {{ task.createdAt | date:'shortTime' }}</div>
+    </div>
+
+    <div class="row">
+      <label>Status</label>
+      <div>
+        <span [class.badge]="true" [class.badge-done]="task.completed" [class.badge-open]="!task.completed">
+          {{ task.completed ? 'Completed' : 'Open' }}
+        </span>
+        <button (click)="toggle(task)">{{ task.completed ? 'Mark Open' : 'Mark Done' }}</button>
+      </div>
+    </div>
+
+    <form (ngSubmit)="save(task)">
+      <div class="row">
+        <label for="title">Title</label>
+        <input id="title" type="text" [formControl]="titleControl" />
+      </div>
+      <button type="button" (click)= "save(task)" [disabled]="titleControl.invalid">Save</button>
+      <button type="button" class="danger" (click)="remove(task)">Delete</button>
+    </form>
+  </section>
+</ng-container>
+
+<ng-template #missing>
+  <section class="card">
+    <a routerLink="/tasks">← Back</a>
+    <p>Task not found.</p>
+  </section>
+</ng-template>
